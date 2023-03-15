@@ -18,12 +18,12 @@
   {% else %}
   <h1 class="fw-bold">{{task.title}}</h1>
   {% endif %}
-  <p>{{task.user.username}}</p>
+  <p>{{task.usuario.username}}</p>
     </header>
 
-  <p>Description: {{task.description}}</p>
+  <p>Descripción: {{task.description}}</p>
   {% if task.datecompleted != None %}
-  <p>Datecompleted: {{task.datecompleted|date:'M j Y:i'}}</p>
+  <p>Fecha de finalización: {{task.datecompleted|date:'M j Y:i'}}</p>
   {% endif %}
 </a>
 {% endfor %}</ul></div>

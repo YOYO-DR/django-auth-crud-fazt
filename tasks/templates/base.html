@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-  <title>Django CRUD Application</title>
+  <title>Django CRUD</title>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">Django App</a>
+    <a class="navbar-brand" href="/">Aplicación de Django</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,14 +20,14 @@
       
       {% comment "" %}Verifico si el usuario esta autenticado con ese objeto global, y dependiendo si tiene una sesion activa o no, le muestro el signop o el Logout{% endcomment %}
       {% if user.is_authenticated %}
-      <li class="nav-item"><a href="/tasks/" class="nav-link">Tasks pending</a></li>
-      <li class="nav-item"><a href="{% url 'tasks_completed' %}" class="nav-link">Tasks completed</a></li>
-      <li class="nav-item"><a href="/tasks/create/" class="nav-link">Create task</a></li>
-      <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+      <li class="nav-item"><a href="/tasks/" class="nav-link">Tareas pendientes</a></li>
+      <li class="nav-item"><a href="{% url 'tasks_completed' %}" class="nav-link">Tareas completadas</a></li>
+      <li class="nav-item"><a href="/tasks/create/" class="nav-link">Crear tarea</a></li>
+      <li class="nav-item"><a href="/logout" class="nav-link">Cerrar sesión</a></li>
       {% else %}
-    <li class="nav-item"><a href="/signup" class="nav-link">Signup</a></li>
+    <li class="nav-item"><a href="/signup" class="nav-link">Registrarse</a></li>
 
-    <li class="nav-item"><a href="/signin" class="nav-link">Signin</a></li>
+    <li class="nav-item"><a href="/signin" class="nav-link">Iniciar sesión</a></li>
       {% endif %}
       </ul>
     </div>

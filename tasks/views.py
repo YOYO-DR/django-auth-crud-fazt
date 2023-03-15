@@ -48,13 +48,13 @@ def signup(request):
 @login_required
 def tasks(request):
   #asi me trae las tareas que sean solo del usuario actual
-  task=Task.objects.filter(user=request.user,datecompleted__isnull=True)
+  task=Task.objects.filter(usuario=request.user,fecha_finalizacion__isnull=True)
   return render(request,'tasks.html',{'tasks':task,'title':'Tareas pendientes'})
 
 @login_required
 def tasks_completed(request):
   #asi me trae las tareas que sean solo del usuario actual
-  task=Task.objects.filter(user=request.user,datecompleted__isnull=False).order_by('-datecompleted')
+  task=Task.objects.filter(usuario=request.user,fecha_finalizacion__isnull=False).order_by('-fecha_finalizacion')
   return render(request,'tasks.html',{'tasks':task,'title':'Tareas completadas'})
 
 @login_required
@@ -71,7 +71,7 @@ def create_task(request):
     # new_task = form.save(commit=False)
     #porque el modelo necesita el usuario, y cuando el usuario esta logueado, la clase del usuario siempre esta en el request como "request.user"
       new_task = form.save(commit=False)
-      new_task.user=request.user
+      new_task.usuario=request.user
       new_task.save()
       return redirect('tasks')
     except ValueError:
@@ -87,14 +87,14 @@ def task_detail(request,task_id):
   if request.method=="GET":
   #esta funcion, le paso el modelo y el filtro o como lo llamo con el orm de object.get, y si no lo encuentra, simplemente le dice un 404, y si lo encuntra, muestra los valores, y asi no tumba el servidor por si no encuentra esa tarea con su llave primaria
   #al comparar el user con el request.user, que es el usuario logueado, puedo decirle que la tarea a buscar debe tener un id y ademas que el user al cual pertenece esa tarea tambien debe conincidir con el user el cual esta logueado y asi no accede a tareas de otros usuarios
-    task = get_object_or_404(Task,pk=task_id, user=request.user)
+    task = get_object_or_404(Task,pk=task_id, usuario=request.user)
   #crear formulario apartir de los datoss recibidos del usuario anteriormente para editarlo
     form = TaskForm(instance=task)
     return render(request,'task_detail.html',{'task':task,'form':form})
   else:
     try:
     #obtengo el objeto/registro de la tarea
-      task = get_object_or_404(Task, pk=task_id, user=request.user)
+      task = get_object_or_404(Task, pk=task_id, usuario=request.user)
       #creo una instacia del formulario como cuando creamos el formulario, nomas que le paso los datos actualizados y que la instancia o tarea es la que conseguimos
       form=TaskForm(request.POST,instance=task)
       form.save()
@@ -105,7 +105,7 @@ def task_detail(request,task_id):
 @login_required
 def complete_task(request,task_id):
 #obtengo la tarea
-  task=get_object_or_404(Task,pk=task_id,user=request.user)
+  task=get_object_or_404(Task,pk=task_id,usuario=request.user)
   #si visita la pagina (o lo mando a ella)
   if request.method=='POST':
     #con el timezone.now() le pongo la fecha de hoy, es una lib de django, y luego guardo ese valor actualizado
@@ -116,7 +116,7 @@ def complete_task(request,task_id):
 @login_required
 def delete_task(request,task_id):
 #obtengo la tarea
-  task=get_object_or_404(Task,pk=task_id,user=request.user)
+  task=get_object_or_404(Task,pk=task_id,usuario=request.user)
   #si visita la pagina (o lo mando a ella)
   if request.method=='POST':
     #si encontro la tarea, borrala

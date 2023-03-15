@@ -2,14 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Task(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    datecompleted=models.DateTimeField(null=True,blank=True)
-    important = models.BooleanField(default=False)
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True)
+    creacion = models.DateTimeField(auto_now_add=True)
+    fecha_finalizacion=models.DateTimeField(null=True,blank=True)
+    importante = models.BooleanField(default=False)
     #cascade por si se borra el usuario, se borran sus registros
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
-      return self.title+" - del usuario "+self.user.username
+      return self.titulo+" - del usuario "+self.usuario.username
     #minuto 1:19:00
