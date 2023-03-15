@@ -9,5 +9,5 @@ set -o errexit
 # para que en la nube, se instale esos requerimientos de mi proyecto, se saca con "pip freeze > requeriments.txt"
 pip install -r requirements.txt
 python manage.py collectstatic --no-input
-python manage.py makemigration
+# python manage.py makemigration
 python manage.py migrate

@@ -13,17 +13,17 @@
   {% endcomment %}
 
     <header class="d-flex justify-content-between">
-      {% if task.important %}
-  <h1 class="fw-bold text-success">{{task.title}}</h1>
+      {% if task.importante %}
+  <h1 class="fw-bold text-success">{{task.titulo}}</h1>
   {% else %}
-  <h1 class="fw-bold">{{task.title}}</h1>
+  <h1 class="fw-bold">{{task.titulo}}</h1>
   {% endif %}
   <p>{{task.usuario.username}}</p>
     </header>
 
-  <p>Descripción: {{task.description}}</p>
-  {% if task.datecompleted != None %}
-  <p>Fecha de finalización: {{task.datecompleted|date:'M j Y:i'}}</p>
+  <p>Descripción: {{task.descripcion}}</p>
+  {% if task.fecha_finalizacion != None %}
+  <p>Fecha de finalización: {{task.fecha_finalizacion|date:'M j Y:i'}}</p>
   {% endif %}
 </a>
 {% endfor %}</ul></div>
