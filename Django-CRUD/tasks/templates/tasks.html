@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Tareas</h1>
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center display-3 py-5">{{title}}</h1>
+
+<ul class="list-group">
+  {% for task in tasks %}
+<a href="{% url 'task_detail' task.id %}" class="list-group-item">
+  {% comment "" %}
+  como esa url es dinamica, y recibe un entero, debo pasarle ese entero cuando vaya a acceder a esa urls con su name, en este caso, el id de la tarea, entonces despues de pasarle en name de la ruta, le paso el id de la tarea
+  {% endcomment %}
+
+    <header class="d-flex justify-content-between">
+      {% if task.important %}
+  <h1 class="fw-bold text-success">{{task.title}}</h1>
+  {% else %}
+  <h1 class="fw-bold">{{task.title}}</h1>
+  {% endif %}
+  <p>{{task.user.username}}</p>
+    </header>
+
+  <p>Description: {{task.description}}</p>
+  {% if task.datecompleted != None %}
+  <p>Datecompleted: {{task.datecompleted|date:'M j Y:i'}}</p>
+  {% endif %}
+</a>
+{% endfor %}</ul></div>
+  </div>
+</main>
 {% endblock content %}
 
