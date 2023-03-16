@@ -109,7 +109,7 @@ def complete_task(request,task_id):
   #si visita la pagina (o lo mando a ella)
   if request.method=='POST':
     #con el timezone.now() le pongo la fecha de hoy, es una lib de django, y luego guardo ese valor actualizado
-    task.datecompleted=timezone.now()
+    task.fecha_finalizacion=timezone.now()
     task.save()
     return redirect('tasks_completed')
 
